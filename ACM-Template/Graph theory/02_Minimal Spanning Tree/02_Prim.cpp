@@ -26,8 +26,8 @@ struct Prim
 
     void AddEdge(int from, int to, int dist)
     {
-        edges.emplace_back(from, to, dist);
-        edges.emplace_back(to, from, dist);
+        edges.push_back(Edge(from, to, dist));
+        edges.push_back(Edge(to, from, dist));
         m = edges.size();
         G[from].push_back(m - 2);
         G[to].push_back(m - 1);
@@ -47,7 +47,7 @@ struct Prim
     {
         int ans = 0;
         priority_queue<HeapNode> Q;
-        for (int i = 0; i <= n; i++) d[i] = INF;
+        memset(d, INF, sizeof(d));
         d[s] = 0;
         memset(done, 0, sizeof(done));
         Q.push(HeapNode(s, 0));
@@ -59,13 +59,13 @@ struct Prim
             done[u] = true;
             ans += d[u];
             res.push_back(p[u]);
-            for (auto& id : G[u])
+            for (int i = 0; i < G[u].size(); i++)
             {
-                Edge& e = edges[id];
+                Edge& e = edges[G[u][i]];
                 if (d[e.to] > e.dist)
                 {
                     d[e.to] = e.dist;
-                    p[e.to] = id;
+                    p[e.to] = G[u][i];
                     Q.push(HeapNode(e.to, d[e.to]));
                 }
             }
@@ -105,8 +105,8 @@ struct Prim
 
     void AddEdge(int from, int to, int dist)
     {
-        edges.emplace_back(from, to, dist);
-        edges.emplace_back(to, from, dist);
+        edges.push_back(Edge(from, to, dist));
+        edges.push_back(Edge(to, from, dist));
         m = edges.size();
         G[from].push_back(m - 2);
         G[to].push_back(m - 1);
@@ -128,13 +128,13 @@ struct Prim
             done[pos] = true;
             ans += d[pos];
             res.push_back(p[u]);
-            for (auto id : G[pos])
+            for (int i = 0; i < G[u].size(); i++)
             {
-                Edge& e = edges[id];
+                Edge& e = edges[G[u][i]];
                 if (d[e.to] > e.dist)
                 {
                     d[e.to] = e.dist;
-                    p[e.to] = id;
+                    p[e.to] = G[u][i];
                 }
             }
         }

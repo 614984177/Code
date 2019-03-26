@@ -4,7 +4,8 @@ const int INF = 0x3f3f3f3f;
 struct Edge
 {
     int from, to, cap, flow;       //起点,终点,容量,流量
-    Edge(int u, int v, int c, int f) : from(u), to(v), cap(c), flow(f) {}
+    Edge () {}
+    Edge(int from, int to, int cap, int flow) : from(from), to(to), cap(cap), flow(flow) {}
 };
 struct Dinic
 {
@@ -17,7 +18,7 @@ struct Dinic
  
     void init(int n)
     {
-        this->n = n;
+        this->n = n, m = 0;
         edges.clear();
         for (int i = 0; i <= n; i++) G[i].clear();
     }
@@ -40,14 +41,14 @@ struct Dinic
         Q.push(s);
         while (!Q.empty())
         {
-            int x = Q.front(); Q.pop();
-            for (int i = 0; i < G[x].size(); i++)
+            int u = Q.front(); Q.pop();
+            for (int i = 0; i < G[u].size(); i++)
             {
-                Edge& e = edges[G[x][i]];
+                Edge& e = edges[G[u][i]];
                 if (!vis[e.to] && e.cap > e.flow)
                 {
                     vis[e.to] = true;
-                    d[e.to] = d[x] + 1;
+                    d[e.to] = d[u] + 1;
                     Q.push(e.to);
                 }
             }

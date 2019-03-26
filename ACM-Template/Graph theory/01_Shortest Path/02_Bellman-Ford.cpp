@@ -5,7 +5,7 @@ struct Edge
 {
     int from, to, dist;
     Edge() {}
-    Edge(int u, int v, int w) : from(u), to(v), dist(w) {}
+    Edge(int from, int to, int dist) : from(from), to(to), dist(dist) {}
 };
 struct BellmanFord
 {
@@ -26,7 +26,7 @@ struct BellmanFord
 
     void AddEdge(int from, int to, int dist)
     {
-        edges.emplace_back(from, to, dist);
+        edges.push_back(Edge(from, to, dist));
         m = edges.size();
         G[from].push_back(m - 1);
     }
@@ -36,21 +36,20 @@ struct BellmanFord
         queue<int> Q;
         memset(inq, 0, sizeof(inq));
         memset(cnt, 0, sizeof(cnt));
-        for (int i = 0; i <= n; i++) d[i] = INF;
-        d[s] = 0;
-        inq[s] = true;
+        memset(d, INF, sizeof(d));
+        d[s] = 0; inq[s] = true;
         Q.push(s);
         while (!Q.empty())
         {
             int u = Q.front(); Q.pop();
             inq[u] = false;
-            for (auto& id : G[u])
+            for (int i = 0; i < G[u].size(); i++)
             {
-                Edge& e = edges[id];
+                Edge& e = edges[G[u][i]];
                 if (d[u] < INF && d[e.to] > d[u] + e.dist)
                 {
                     d[e.to] = d[u] + e.dist;
-                    p[e.to] = id;
+                    p[e.to] = G[u][i];
                     if (!inq[e.to])
                     {
                         Q.push(e.to);
@@ -70,8 +69,9 @@ const int MAXN = "Edit";
 const int INF = 0x3f3f3f3f;
 struct Edge
 {
-    int from, to, dist;       //起点,终点,距离
-    Edge(int u, int v, int w):from(u), to(v), dist(w) {}
+    int from, to, dist;
+    Edge() {}
+    Edge(int from, int to, int dist) : from(from), to(to), dist(dist) {}
 };
 struct BellmanFord
 {
@@ -91,14 +91,14 @@ struct BellmanFord
 
     void AddEdge(int from, int to, int dist)
     {
-        edges.emplace_back(from, to, dist);
+        edges.push_back(Edge(from, to, dist));
         m = edges.size();
         G[from].push_back(m - 1);
     }
 
     bool bellmanford(int s)//bellmanford
     {
-        for (int i = 0; i <= n; i++) d[i] = INF;
+        memset(d, INF, sizeof(d));
         d[s] = 0;
         for (int k = 0; k < n - 1; k++)//迭代n-1次
         {
@@ -132,8 +132,9 @@ const int MAXN = "Edit";
 const int INF = 0x3f3f3f3f;
 struct Edge
 {
-    int from, to, dist;       //起点,终点,距离
-    Edge(int u, int v, int w):from(u), to(v), dist(w) {}
+    int from, to, dist;
+    Edge() {}
+    Edge(int from, int to, int dist) : from(from), to(to), dist(dist) {}
 };
 struct BellmanFord
 {
@@ -155,7 +156,7 @@ struct BellmanFord
 
     void AddEdge(int from, int to, int dist)
     {
-        edges.emplace_back(from, to, dist);
+        edges.push_back(Edge(from, to, dist));
         m = edges.size();
         G[from].push_back(m - 1);
     }

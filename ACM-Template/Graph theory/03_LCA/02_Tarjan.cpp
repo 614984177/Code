@@ -66,18 +66,18 @@ struct LCA
     void tarjan(int u)
     {
         vis[u] = 1;
-        for (auto& i : G[u])
+        for (int i = 0; i < G[u].size(); i++)
         {
-            Edge& e = edges[i];
+            Edge& e = edges[G[u][i]];
             int v = e.to;
             if (vis[v]) continue;
             d[v] = d[u] + e.dist;
             tarjan(v);
             unite(u, v);
         }
-        for (auto& i : Q[u])
+        for (int i = 0; i < Q[u].size(); i++)
         {
-            Query& q = querys[i];
+            Query& q = querys[Q[u][i]];
             if (!vis[q.b]) continue;
             lca[q.id] = Find(q.b);
         }

@@ -19,13 +19,13 @@ struct Dijkstra
     void init(int n)
     {
         this->n = n, m = 0;
-        edges.clear();                            // 清空边表
+        edges.clear();                             // 清空边表
         for (int i = 0; i <= n; i++) G[i].clear(); // 清空邻接表
     }
 
     void AddEdge(int from, int to, int dist)
     { // 如果是无向图，每条无向边需调用两次AddEdge
-        edges.emplace_back(from, to, dist);
+        edges.push_back(Edge(from, to, dist));
         m = edges.size();
         G[from].push_back(m - 1);
     }
@@ -33,6 +33,7 @@ struct Dijkstra
     struct HeapNode
     {
         int from, dist;
+        HeapNode (int from, int dist) : from(from), dist(dist) {}
         bool operator < (const HeapNode& rhs) const
         {
             return dist > rhs.dist;
@@ -42,9 +43,9 @@ struct Dijkstra
     void dijkstra(int s)
     {
         priority_queue<HeapNode> Q;
-        for (int i = 0; i <= n; i++) d[i] = INF;
-        d[s] = 0;
+        memset(d, INF, sizeof(d));
         memset(done, 0, sizeof(done));
+        d[s] = 0;
         Q.push(HeapNode(s, 0));
         while (!Q.empty())
         {
@@ -52,13 +53,13 @@ struct Dijkstra
             int u = x.from;
             if (done[u]) continue;
             done[u] = true;
-            for (auto& id : G[u])
+            for (int i = 0; i < G[u].size(); i++)
             {
-                Edge& e = edges[id];
+                Edge& e = edges[G[u][i]];
                 if (d[e.to] > d[u] + e.dist)
                 {
                     d[e.to] = d[u] + e.dist;
-                    p[e.to] = id;
+                    p[e.to] = G[u][i];
                     Q.push(HeapNode(e.to, d[e.to]));
                 }
             }
@@ -96,16 +97,16 @@ struct Dijkstra
 
     void AddEdge(int from, int to, int dist)
     { // 如果是无向图，每条无向边需调用两次AddEdge
-        edges.emplace_back(from, to, dist);
+        edges.push_back(Edge(from, to, dist));
         m = edges.size();
         G[from].push_back(m - 1);
     }
 
     void dijkstra(int s)
     { // 注意此种写法编号从0开始
-        for (int i = 0; i <= n; i++) d[i] = INF;
-        d[s] = 0;
+        memset(d, INF, sizeof(d));
         memset(done, 0, sizeof(done));
+        d[s] = 0;
         for (int i = 0; i < n; i++)
         {
             int pos, MIN = INF;
@@ -114,13 +115,13 @@ struct Dijkstra
                 if(!done[j] && d[j] < MIN) MIN = d[pos = j];
             }
             done[pos] = true;
-            for (auto id : G[pos])
+            for (int i = 0; i < G[pos].size(); i++)
             {
-                Edge& e = edges[id];
+                Edge& e = edges[G[u][i]];
                 if (d[e.to] > d[pos] + e.dist)
                 {
                     d[e.to] = d[pos] + e.dist;
-                    p[e.to] = id;
+                    p[e.to] = G[u][i];
                 }
             }
         }

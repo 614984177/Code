@@ -29,21 +29,21 @@ struct EulerianPath
     void AddEdge(int from, int to)
     {
         outdeg[from]++, indeg[to]++;
-        edges.emplace_back(Edge(from, to));
+        edges.push_back(Edge(from, to));
         m = edges.size();
         G[from].push_back(m - 1);
     }
 
     void Fleury(int u)
     {
-        for (auto id : G[u])
+        for (int i = 0; i < G[u].size(); i++)
         {
-            Edge& e = edges[id];
-            if (!vis[id])
+            Edge& e = edges[G[u][i]];
+            if (!vis[G[u][i]])
             {
-                vis[id] = true;
+                vis[G[u][i]] = true;
                 Fleury(e.to);
-                ans.push_back(id);
+                ans.push_back(G[u][i]);
             }
         }
     }

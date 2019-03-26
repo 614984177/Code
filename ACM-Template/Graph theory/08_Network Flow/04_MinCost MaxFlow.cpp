@@ -3,7 +3,8 @@ const int INF = 0x3f3f3f3f;
 struct Edge
 {
     int from, to, cap, flow, cost;       //起点,终点,容量,流量,花费
-    Edge(int u, int v, int c, int f, int w):from(u), to(v), cap(c), flow(f), cost(w) {}
+    Edge () {}
+    Edge(int from, int to, int cap, int flow, int cost):from(from), to(to), cap(cap), flow(flow), cost(cost) {}
 };
 struct MCMF
 {
@@ -69,7 +70,7 @@ struct MCMF
     int MinCostMaxFlow(int s, int t, long long& cost)
     {
         int flow = 0; cost = 0;
-        while (BellmanFord(s, t, flow, cost));
+        while (BellmanFord(s, t, flow, cost)) ;
         return flow;
     }
  

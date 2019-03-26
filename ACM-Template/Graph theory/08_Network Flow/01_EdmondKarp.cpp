@@ -4,6 +4,7 @@ const int INF = 0x3f3f3f3f;
 struct Edge
 {
     int from, to, cap, flow;    //起点,终点,容量,流量
+    Edge () {}
     Edge(int u, int v, int c, int f):from(u), to(v), cap(c), flow(f){}
 };
 struct EdmondsKarp
