@@ -33,9 +33,7 @@ struct LineBase
     {
         LL res = 0;
         for (int i = 60; i >= 0; i--)
-        {
             if ((res^b[i]) > res) res ^= b[i];
-        }
         return res;
     }
 
@@ -67,8 +65,7 @@ struct LineBase
             if (k & (1LL << i)) res ^= q[i];
         return res;
     }
-
-
+    
 }LB;
 
 
