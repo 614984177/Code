@@ -33,6 +33,7 @@
         "deque": "cpp",
         "vector": "cpp",
         "iostream": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "cmath": "cpp"
     } // 效果效果比cpptools要好
 }
