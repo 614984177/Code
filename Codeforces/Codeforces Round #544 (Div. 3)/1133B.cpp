@@ -2,27 +2,17 @@
 using namespace std;
 const int MAXN = 2e5 + 5;
 int n, k, a[MAXN];
-set<int> s[105];
-bool vis[MAXN];
 int main()
 {
     scanf("%d%d", &n, &k);
-    for (int i = 0; i < n; i++) scanf("%d", &a[i]), s[a[i] % k].insert(i);
-    long long ans = 0;
     for (int i = 0; i < n; i++)
     {
-        int t1 = a[i] % k, t2 = (k - a[i] % k) % k;
-        if (!s[t1].count(i)) continue;
-        s[t1].erase(i);
-        if (!s[t2].empty())
-        {
-            int pos = *s[t2].begin();
-            s[a[pos] % k].erase(pos);
-            ans++;
-            //cout << i << " " << pos << endl;
-        }
+        int x; scanf("%d", &x);
+        a[x % k]++;
     }
-    printf("%lld\n", ans * 2);
+    int cnt = 0;
+    for (int i = 1; i < (k + 1) / 2; i++) cnt += min(a[i], a[k - i]);
+    printf("%d\n", cnt * 2 + a[0] / 2 * 2 + (k % 2 == 0 ? a[k / 2] / 2 * 2 : 0));
     return 0;
 }
 /*
