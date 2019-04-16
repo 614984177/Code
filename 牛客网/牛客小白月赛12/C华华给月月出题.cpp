@@ -24,7 +24,7 @@ void GetPrime(int n)
     for (int i = 2; i <= n; i++)
     {
         if (!vis[i])
-        { 
+        {  
             prime[++tot] = i;
             value[i] = qpow(i, n, MOD);
         }
