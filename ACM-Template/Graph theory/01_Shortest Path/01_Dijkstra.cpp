@@ -1,11 +1,12 @@
 //堆优化，时间复杂度m*logn
 const int MAXN = "Edit";
-const int INF = 0x3f3f3f3f;
+typedef long long LL;
+const LL INF = 0x3f3f3f3f3f3f3f3f;
 struct Edge
 {
-    int from, to, dist;
+    int from, to; LL dist;
     Edge() {}
-    Edge(int u, int v, int w) : from(u), to(v), dist(w) {}
+    Edge(int from, int to, LL dist) : from(from), to(to), dist(dist) {}
 };
 struct Dijkstra
 {
@@ -13,7 +14,7 @@ struct Dijkstra
     vector<Edge> edges;  // 边列表
     vector<int> G[MAXN]; // 每个节点出发的边编号（从0开始编号）
     bool done[MAXN];     // 是否已永久标号
-    int d[MAXN];         // s到各点的距离
+    LL d[MAXN];         // s到各点的距离
     int p[MAXN];         // p[i]表示最短路径树中到达i点的边的编号
 
     void init(int n)
@@ -23,8 +24,8 @@ struct Dijkstra
         for (int i = 0; i <= n; i++) G[i].clear(); // 清空邻接表
     }
 
-    void AddEdge(int from, int to, int dist)
-    { // 如果是无向图，每条无向边需调用两次AddEdge
+    void AddEdge(int from, int to, LL dist) // 如果是无向图，每条无向边需调用两次AddEdge
+    {
         edges.push_back(Edge(from, to, dist));
         m = edges.size();
         G[from].push_back(m - 1);
@@ -32,8 +33,8 @@ struct Dijkstra
 
     struct HeapNode
     {
-        int from, dist;
-        HeapNode (int from, int dist) : from(from), dist(dist) {}
+        int from; LL dist;
+        HeapNode (int from, LL dist) : from(from), dist(dist) {}
         bool operator < (const HeapNode& rhs) const
         {
             return dist > rhs.dist;
