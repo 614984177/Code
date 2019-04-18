@@ -95,7 +95,7 @@ struct Edge
     int from, to;
     Edge (int u, int v): from(u), to(v) {}
 };
-struct EdgeBCC//边双连通分量
+struct EdgeBCC //边双连通分量
 {
 	//有重边也算桥的时候，记得先去重再加边！！！
     int n, m;
@@ -116,14 +116,13 @@ struct EdgeBCC//边双连通分量
         edges.push_back(Edge(from, to));
         edges.push_back(Edge(to, from));
         m = edges.size();
-        G[from].push_back(m-2);
-        G[to].push_back(m-1);
+        G[from].push_back(m - 2);
+        G[to].push_back(m - 1);
     }
 
-    int dfs(int u, int fa)
+    void dfs(int u, int fa)
     {
-        int lowu = DFN[u] = ++dfs_clock;
-        int child = 0;
+        LOW[u] = DFN[u] = ++dfs_clock;
         bool flag = false;
         for (int i = 0; i < G[u].size(); i++)
         {
@@ -132,20 +131,17 @@ struct EdgeBCC//边双连通分量
             if (v == fa && !flag) { flag = true; continue; }
             if (!DFN[v]) //没有访问过v
             {
-                child++;
-                int lowv = dfs(v, u);
-                lowu = min(lowu, lowv); //用后代的low函数更新自己
-                if (lowv > DFN[u])//桥
+                dfs(v, u);
+                LOW[u] = min(LOW[u], LOW[v]); //用后代的low函数更新自己
+                if (LOW[v] > DFN[u])//桥
                 {
                     bridge.push_back(e);
                     isbridge[G[u][i]] = isbridge[G[u][i]^1] = true;
-                }   
+                }
             }
             else if (DFN[v] < DFN[u])
-                lowu = min(lowu, DFN[v]); //用反向边更新自己
+                LOW[u] = min(LOW[u], DFN[v]); //用反向边更新自己
         }
-        LOW[u] = lowu;
-        return lowu;
     }
 
     void dfs2(int u)
@@ -153,7 +149,7 @@ struct EdgeBCC//边双连通分量
         bccno[u] = bcc_cnt;
         for(int i = 0; i < G[u].size(); i++)
         {
-            Edge e = edges[G[u][i]];
+            Edge& e = edges[G[u][i]];
             if(!isbridge[G[u][i]] && !bccno[e.to])
                 dfs2(e.to);
         }
@@ -164,9 +160,9 @@ struct EdgeBCC//边双连通分量
         memset(DFN, 0, sizeof(DFN)), memset(LOW, 0, sizeof(LOW));
         bridge.clear(), memset(bccno, 0, sizeof(bccno));
         dfs_clock = bcc_cnt = 0;
-        for (int i = 0; i < n; i++)
-            if (!DFN[i]) dfs(i, -1);
-        for(int i = 0; i < n; i++)
+        for (int i = 1; i <= n; i++)
+            if (!DFN[i]) dfs(i, 0);
+        for (int i = 1; i <= n; i++)
             if(!bccno[i]) bcc_cnt++, dfs2(i);
     }
 
