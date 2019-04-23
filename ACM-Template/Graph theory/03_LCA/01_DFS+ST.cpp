@@ -22,7 +22,7 @@ struct LCA
     {
         this->n = n, m = 0;
         edges.clear(), sp.clear();
-        for (int i = 0; i < n; i++) G[i].clear(), d[i] = 0;
+        for (int i = 0; i <= n; i++) G[i].clear(), d[i] = 0;
         sp.clear();
     }
 
