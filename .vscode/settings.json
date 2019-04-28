@@ -27,15 +27,5 @@
         "-std=c++14",
         "-Wall"
     ],
-    "clang.completion.enable": true,
-    "files.associations": {
-        "ostream": "cpp",
-        "deque": "cpp",
-        "vector": "cpp",
-        "iostream": "cpp",
-        "unordered_map": "cpp",
-        "cmath": "cpp",
-        "*.tcc": "cpp",
-        "list": "cpp"
-    } // 效果效果比cpptools要好
+    "clang.completion.enable": true // 效果效果比cpptools要好
 }
