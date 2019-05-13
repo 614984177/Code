@@ -3,13 +3,13 @@ using namespace std;
 class Solution 
 {
 public:
-    int findPeakElement(vector<int>& nums) 
+    int peakIndexInMountainArray(vector<int>& A) 
     {
-        int l = 0, r = nums.size();
+        int l = 1, r = A.size() - 1;
         while (l < r)
         {
             int m = l + (r - l) / 2;
-            if (m == 0 || m == nums.size() || nums[m - 1] < nums[m]) l = m + 1;
+            if (A[m - 1] < A[m]) l = m + 1;
             else r = m;
         }
         return l - 1;
