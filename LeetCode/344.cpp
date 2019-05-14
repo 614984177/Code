@@ -21,7 +21,7 @@ int main()
 {
     Solution AC;
     string s;
-    while (cin >> s)
+    while (getline(cin, s))
     {
         cout << AC.reverseWords(s) << endl;
     }
