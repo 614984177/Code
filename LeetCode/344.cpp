@@ -4,29 +4,29 @@ const int MAXN = 1e5 + 5;
 class Solution 
 {
 public:
-    string reverseWords(string s) 
+    void reverseString(vector<char>& s) 
     {
-        string ans;
-        stringstream ss(s);
-        while (ss >> s) 
-        {
-            reverse(s.begin(), s.end());
-            if (ans != "") ans += " ";
-            ans += s;
-        }
-        return ans;
+        for (int i = 0; i < s.size() / 2; i++)
+            swap(s[i], s[s.size() - i - 1]);
     }
 };
 int main()
 {
     Solution AC;
-    string s;
-    while (getline(cin, s))
+    int n;
+    while (cin >> n)
     {
-        cout << AC.reverseWords(s) << endl;
+        vector<char> a(n, '\0');
+        for (int i = 0; i < n; i++) cin >> a[i];
+        AC.reverseString(a);
+        for (auto i : a) cout << i;
+        cout << endl;
     }
     return 0;
 }
 /*
-Let's take LeetCode contest
+5
+hello
+6
+Hannah
 */
