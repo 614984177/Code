@@ -15,7 +15,7 @@ public:
     int MAX;
     int dfs(TreeNode* root)
     {
-        if (root == nullptr) return ;
+        if (root == nullptr) return 0;
         int l = 0, r = 0;
         if (root->left != nullptr) l = max(l, dfs(root->left));
         if (root->right != nullptr) r = max(r, dfs(root->right));
