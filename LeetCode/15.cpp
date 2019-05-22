@@ -21,7 +21,7 @@ public:
                 else 
                 {
                     int x = nums[l], y = nums[r];
-                    ans.emplace_back({nums[i], nums[l], nums[r]});
+                    ans.push_back({nums[i], nums[l], nums[r]});
                     while (l < r && nums[l] == x) l++;
                     while (l < r && nums[l] == x) r--;
                 }
