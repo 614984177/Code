@@ -13,7 +13,7 @@ public:
         {
             int x = sign * (str[i] - '0');
             if (res > INT_MAX / 10 || (res == INT_MAX / 10 && x > 7)) return INT_MAX;
-            if (res < INT_MIN / 10 || (res == INT_MAX / 10 && x < -8)) return INT_MIN;
+            if (res < INT_MIN / 10 || (res == INT_MIN / 10 && x < -8)) return INT_MIN;
             res = res * 10 + x;
             i++;
         }
