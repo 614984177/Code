@@ -6,13 +6,14 @@ class Solution
 public:
     int superEggDrop(int K, int N) 
     {
-        vector<vector<int>> dp(N + 1, vector<int>(K + 1, 0));
+        vector<int> dp(K + 1, 0);
         for (int i = 1; i <= N; ++i)
         {
-            for (int j = 1; j <= K; j++)
+            for (int j = K; j >= 1; --j)
             {
-                dp[i][j] = dp[i - 1][j] + dp[i - 1][j - 1] + 1;
-                if (dp[i][j] >= N) return i;
+                // dp[i][j] = dp[i - 1][j] + dp[i - 1][j - 1] + 1;
+                dp[j] = dp[j] + dp[j - 1] + 1;
+                if (dp[j] >= N) return i;
             }
         }
         return N;
