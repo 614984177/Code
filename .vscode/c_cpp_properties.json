@@ -1,9 +1,9 @@
 {
     "configurations": [
         {
-            "name": "MinGW",
-            "intelliSenseMode": "clang-x64",
-            "compilerPath": "D:/LLVM/bin/clang++.exe",
+            "name": "Win32",
+            "intelliSenseMode": "${default}",
+            "compilerPath": "D:/LLVM/bin/g++.exe",
             "includePath": [
                 "${workspaceFolder}",
                 "D:/LLVM/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/"
