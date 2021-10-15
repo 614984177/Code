@@ -4,7 +4,7 @@ const int MAXN = 1e5 + 5;
 
 int main()
 {
-    test
+    test1
     return 0;
 }
 /*
