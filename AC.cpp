@@ -9,6 +9,7 @@ int main()
     for (int i = 0; i < 10; i++){
         x += 1;
     }
+    printf("%d", x);
     return 0;
 }
 /*
