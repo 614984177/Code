@@ -27,7 +27,6 @@ private:
         if (L >= R) return ;
         int l = L, r = R;
         partition(a, L, R, l, r);
-        for (int i = 0; i < a.size(); i++) cout << a[i] << " ";
         Sort(a, L, l);
         Sort(a, r, R);
     }
@@ -42,6 +41,7 @@ int main()
         for (int i = 0; i < n; i++) cin >> a[i];
         AC.sortArray(a);
         for (int i = 0; i < n; i++) cout << a[i] << " ";
+        cout << endl;
     }
     return 0;
 }
