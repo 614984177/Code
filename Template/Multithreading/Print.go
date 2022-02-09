@@ -127,6 +127,7 @@ func PrintNum() {
 	chanQueue[0] <- struct{}{}
 	<-exitChan
 }
+
 func main() {
 	// PrintOddEven()
 	// PrintABC()
