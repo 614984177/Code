@@ -17,7 +17,6 @@ public:
             if (!matrix[0][i]) fr = true;
         for (int i = 0; i < n; i++)
             if (!matrix[i][0]) fc = true;
-        printf("%d %d\n", fc, fr);
         for (int i = 1; i < n; i++)
             for (int j = 1; j < m; j++)
                 if (!matrix[i][j])
