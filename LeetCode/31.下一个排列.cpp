@@ -1,6 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int MAXN = 1e5 + 5;
+/*
+ * @lc app=leetcode.cn id=31 lang=cpp
+ *
+ * [31] 下一个排列
+ */
+
+// @lc code=start
 class Solution 
 {
 public:
@@ -17,6 +24,7 @@ public:
         }
     }
 };
+// @lc code=end
 
 int main()
 {
@@ -32,4 +40,6 @@ int main()
 /*
 3
 1 2 3
+3
+3 2 1
 */
