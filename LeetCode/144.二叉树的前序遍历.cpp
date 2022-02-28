@@ -21,22 +21,19 @@ using namespace std;
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
-        vector<int> ans;
-        stack<TreeNode*> st;
-        if (root) {
-            st.emplace(root);
-        }
-        while (!st.empty()) {
-            TreeNode* t = st.top(); st.pop();
-            ans.emplace_back(t->val);
-            if (t->right) {
-                st.emplace(t->right);
+        vector<int> preorder;
+        stack<TreeNode*> s;
+        while (root != nullptr || !s.empty()) {
+            while (root) {
+                preorder.emplace_back(root->val);
+                s.push(root);
+                root = root->left;
             }
-            if (t->left) {
-                st.emplace(t->left);
-            }
+            root = s.top();
+            s.pop();
+            root = root->right;
         }
-        return ans;
+        return preorder;
     }
 };
 // @lc code=end
